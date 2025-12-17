@@ -1,0 +1,181 @@
+<view class="workbench-page">
+  <!-- 顶部导航栏 -->
+  <van-nav-bar title="工作台" fixed placeholder />
+
+  <!-- Tab 栏 -->
+  <van-tabs 
+    active="{{ activeTab }}" 
+    bind:change="onTabChange"
+    sticky
+    offset-top="44"
+    color="#1989fa"
+    title-active-color="#1989fa"
+  >
+    <van-tab title="待接单">
+      <view class="order-list">
+        <block wx:if="{{ orders.length > 0 }}">
+          <view 
+            class="order-card card" 
+            wx:for="{{ orders }}" 
+            wx:key="orderId"
+            data-order-id="{{ item.orderId }}"
+            bind:tap="onOrderClick"
+          >
+            <view class="order-header flex-between">
+              <text class="order-id">{{ item.orderId }}</text>
+              <van-tag type="warning" round>待接单</van-tag>
+            </view>
+            <view class="order-address">{{ item.customer.address }}</view>
+            <view class="order-time">
+              <van-icon name="clock-o" size="14px" />
+              <text>{{ item.appointmentTime }}</text>
+            </view>
+            <view class="order-action">
+              <van-button 
+                type="warning" 
+                size="small" 
+                round
+                data-order-id="{{ item.orderId }}"
+                data-action="accept"
+                catch:tap="onActionClick"
+              >立即接单</van-button>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="暂无待接单工单" />
+      </view>
+    </van-tab>
+
+    <van-tab title="接单中">
+      <view class="order-list">
+        <block wx:if="{{ orders.length > 0 }}">
+          <view 
+            class="order-card card" 
+            wx:for="{{ orders }}" 
+            wx:key="orderId"
+            data-order-id="{{ item.orderId }}"
+            bind:tap="onOrderClick"
+          >
+            <view class="order-header flex-between">
+              <text class="order-id">{{ item.orderId }}</text>
+              <van-tag type="primary" round>接单中</van-tag>
+            </view>
+            <view class="order-address">{{ item.customer.address }}</view>
+            <view class="order-time">
+              <van-icon name="clock-o" size="14px" />
+              <text>{{ item.appointmentTime }}</text>
+            </view>
+            <view class="order-action">
+              <van-button 
+                type="primary" 
+                size="small" 
+                round
+                data-order-id="{{ item.orderId }}"
+                data-action="start"
+                catch:tap="onActionClick"
+              >开始实施</van-button>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="暂无接单中工单" />
+      </view>
+    </van-tab>
+
+    <van-tab title="实施中">
+      <view class="order-list">
+        <block wx:if="{{ orders.length > 0 }}">
+          <view 
+            class="order-card card" 
+            wx:for="{{ orders }}" 
+            wx:key="orderId"
+            data-order-id="{{ item.orderId }}"
+            bind:tap="onOrderClick"
+          >
+            <view class="order-header flex-between">
+              <text class="order-id">{{ item.orderId }}</text>
+              <van-tag type="primary" round>实施中</van-tag>
+            </view>
+            <view class="order-address">{{ item.customer.address }}</view>
+            <view class="order-time">
+              <van-icon name="clock-o" size="14px" />
+              <text>{{ item.appointmentTime }}</text>
+            </view>
+            <view class="order-action">
+              <van-button 
+                type="primary" 
+                size="small" 
+                round
+                data-order-id="{{ item.orderId }}"
+                bind:tap="onOrderClick"
+              >继续实施</van-button>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="暂无实施中工单" />
+      </view>
+    </van-tab>
+
+    <van-tab title="已完工">
+      <view class="order-list">
+        <block wx:if="{{ orders.length > 0 }}">
+          <view 
+            class="order-card card" 
+            wx:for="{{ orders }}" 
+            wx:key="orderId"
+            data-order-id="{{ item.orderId }}"
+            bind:tap="onOrderClick"
+          >
+            <view class="order-header flex-between">
+              <text class="order-id">{{ item.orderId }}</text>
+              <van-tag type="success" round>已完工</van-tag>
+            </view>
+            <view class="order-address">{{ item.customer.address }}</view>
+            <view class="order-time">
+              <van-icon name="clock-o" size="14px" />
+              <text>{{ item.appointmentTime }}</text>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="暂无已完工工单" />
+      </view>
+    </van-tab>
+
+    <van-tab title="需返工">
+      <view class="order-list">
+        <block wx:if="{{ orders.length > 0 }}">
+          <view 
+            class="order-card card" 
+            wx:for="{{ orders }}" 
+            wx:key="orderId"
+            data-order-id="{{ item.orderId }}"
+            bind:tap="onOrderClick"
+          >
+            <view class="order-header flex-between">
+              <text class="order-id">{{ item.orderId }}</text>
+              <van-tag type="danger" round>需返工</van-tag>
+            </view>
+            <view class="order-address">{{ item.customer.address }}</view>
+            <view class="order-time">
+              <van-icon name="clock-o" size="14px" />
+              <text>{{ item.appointmentTime }}</text>
+            </view>
+            <view class="order-action">
+              <van-button 
+                type="danger" 
+                size="small" 
+                round
+                data-order-id="{{ item.orderId }}"
+                data-action="rework"
+                catch:tap="onActionClick"
+              >处理返工</van-button>
+            </view>
+          </view>
+        </block>
+        <van-empty wx:else description="暂无需返工工单" />
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>
+
+<van-dialog id="van-dialog" />
+<van-toast id="van-toast" />

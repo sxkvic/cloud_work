@@ -1,19 +1,27 @@
-// app.js
+const authService = require('./services/authService');
+const orderService = require('./services/orderService');
+
 App({
   onLaunch() {
-    // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    // 初始化工单数据
+    orderService.initOrders();
+    
+    // 检查登录状态
+    this.checkLoginStatus();
   },
+
+  checkLoginStatus() {
+    const isLoggedIn = authService.isLoggedIn();
+    
+    if (!isLoggedIn) {
+      // 未登录，跳转到登录页
+      wx.reLaunch({
+        url: '/pages/login/login'
+      });
+    }
+  },
+
   globalData: {
     userInfo: null
   }
-})
+});

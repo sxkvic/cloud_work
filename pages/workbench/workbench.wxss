@@ -1,0 +1,63 @@
+.workbench-page {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  padding-bottom: 24rpx;
+}
+
+/* 工单列表 */
+.order-list {
+  padding: 12rpx 0;
+}
+
+/* 工单卡片 */
+.order-card {
+  margin: 24rpx;
+  padding: 24rpx;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.order-id {
+  font-size: 28rpx;
+  color: #969799;
+}
+
+.order-address {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #323233;
+  margin-bottom: 12rpx;
+  line-height: 1.4;
+}
+
+.order-time {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #969799;
+  margin-bottom: 20rpx;
+}
+
+.order-time text {
+  margin-left: 8rpx;
+}
+
+.order-action {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #ebedf0;
+}
+
+/* Tab 样式调整 */
+.van-tabs__wrap {
+  background-color: #ffffff;
+}
