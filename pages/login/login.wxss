@@ -1,58 +1,70 @@
-.login-page {
+page {
+  background-color: #fff;
+}
+
+.login-container {
+  padding: 60rpx;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(180deg, #1989fa 0%, #f7f8fa 50%);
-  padding-top: 120rpx;
+  box-sizing: border-box;
 }
 
 /* Logo 区域 */
-.logo-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40rpx 0 60rpx;
+.logo-area {
+  margin-top: 40rpx;
+  margin-bottom: 80rpx;
+  text-align: center;
 }
 
-.logo-icon {
-  width: 160rpx;
-  height: 160rpx;
-  background-color: #ffffff;
-  border-radius: 50%;
+.logo-box {
+  width: 140rpx;
+  height: 140rpx;
+  background: #1989fa;
+  border-radius: 24rpx;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  box-shadow: 0 8rpx 24rpx rgba(25, 137, 250, 0.3);
+  margin: 0 auto 30rpx;
+  box-shadow: 0 10rpx 30rpx rgba(25, 137, 250, 0.3);
 }
 
-.app-title {
-  font-size: 48rpx;
+.app-name {
+  font-size: 40rpx;
   font-weight: bold;
-  color: #ffffff;
-  margin-top: 32rpx;
+  color: #333;
+  margin-bottom: 10rpx;
 }
 
-.app-subtitle {
-  font-size: 28rpx;
-  color: rgba(255, 255, 255, 0.8);
-  margin-top: 8rpx;
+.app-desc {
+  font-size: 26rpx;
+  color: #999;
+  letter-spacing: 4rpx;
 }
 
 /* 表单区域 */
-.form-section {
-  padding: 0 24rpx;
-  margin-top: 40rpx;
+.form-area {
+  width: 100%;
 }
 
-.form-section .van-cell-group {
-  border-radius: 24rpx;
+.input-item {
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
   overflow: hidden;
 }
 
-/* 登录按钮 */
-.action-section {
-  padding: 60rpx 48rpx;
+.login-btn {
+  margin-top: 60rpx;
 }
 
-.action-section .van-button {
-  height: 96rpx;
-  font-size: 32rpx;
+/* 底部版权 */
+.footer {
+  position: fixed;
+  bottom: 60rpx;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  color: #ccc;
+  font-size: 24rpx;
 }

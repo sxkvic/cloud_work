@@ -1,10 +1,10 @@
-/**
- * 认证服务 - 处理登录相关逻辑
- */
 const storageService = require('./storageService');
 const { STORAGE_KEYS } = require('../utils/constants');
 
-const AuthService = {
+/**
+ * 认证服务
+ */
+const authService = {
   /**
    * 验证手机号格式
    * @param {string} phone 手机号
@@ -14,7 +14,6 @@ const AuthService = {
     if (!phone || typeof phone !== 'string') {
       return false;
     }
-    // 中国大陆手机号：11位数字，以1开头
     const phoneRegex = /^1[3-9]\d{9}$/;
     return phoneRegex.test(phone);
   },
@@ -34,54 +33,63 @@ const AuthService = {
   },
 
   /**
-   * 登录验证
+   * 登录验证（手机号+验证码）
    * @param {string} phone 手机号
    * @param {string} code 验证码
-   * @returns {Promise<boolean>} 是否登录成功
+   * @returns {Promise<boolean>} 登录是否成功
    */
-  async login(phone, code) {
-    if (!this.validatePhone(phone)) {
-      return false;
-    }
-
-    if (!code || code.length < 4) {
-      return false;
-    }
-
-    // 模拟登录验证（实际项目中应调用后端 API）
-    // 这里简单模拟：任何4位以上验证码都视为有效
+  login(phone, code) {
     return new Promise((resolve) => {
-      setTimeout(() => {
-        // 保存用户信息
+      // 模拟验证码验证，实际项目中应调用后端接口
+      if (code === '123456' || code.length >= 4) {
         const user = {
           phone,
           name: '李师傅',
-          token: `token_${Date.now()}`,
+          token: 'mock_token_' + Date.now(),
           loginTime: new Date().toISOString()
         };
-        
         storageService.set(STORAGE_KEYS.USER, user);
         storageService.set(STORAGE_KEYS.LOGIN_STATUS, true);
-        
         resolve(true);
-      }, 500);
+      } else {
+        resolve(false);
+      }
     });
   },
 
   /**
-   * 检查是否已登录
+   * 工号密码登录
+   * @param {string} jobId 工号
+   * @param {string} password 密码
+   * @returns {boolean} 登录是否成功
+   */
+  loginWithJobId(jobId, password) {
+    // 模拟登录验证
+    const user = {
+      jobId,
+      name: '装维师傅',
+      token: 'mock_token_' + Date.now(),
+      loginTime: new Date().toISOString()
+    };
+    storageService.set(STORAGE_KEYS.USER, user);
+    storageService.set(STORAGE_KEYS.LOGIN_STATUS, true);
+    return true;
+  },
+
+  /**
+   * 检查登录状态
    * @returns {boolean} 是否已登录
    */
   isLoggedIn() {
-    return storageService.get(STORAGE_KEYS.LOGIN_STATUS, false);
+    return storageService.get(STORAGE_KEYS.LOGIN_STATUS) === true;
   },
 
   /**
    * 获取当前用户信息
-   * @returns {object|null} 用户信息
+   * @returns {Object|null} 用户信息
    */
   getCurrentUser() {
-    return storageService.get(STORAGE_KEYS.USER, null);
+    return storageService.get(STORAGE_KEYS.USER);
   },
 
   /**
@@ -93,4 +101,4 @@ const AuthService = {
   }
 };
 
-module.exports = AuthService;
+module.exports = authService;

@@ -86,7 +86,10 @@
     - 添加 van-field 验证码输入框和获取验证码按钮
     - 添加底部悬浮登录按钮（van-button block type="primary"）
     - _Requirements: 1.1_
-  - [ ] 4.2 实现登录页样式
+  - [x] 4.2 实现登录页样式
+
+
+
     - 创建 pages/login/login.wxss 样式文件
     - 实现 Logo 居中和标题样式
     - 实现表单区域样式

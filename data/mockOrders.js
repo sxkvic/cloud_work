@@ -3,144 +3,136 @@
  */
 const mockOrders = [
   {
-    orderId: 'WO20231201001',
+    orderId: 'WO2023102901',
+    orderNo: 'WO2023102901',
     status: 'pending',
     customer: {
       name: '张先生',
-      phone: '138****1234',
-      address: '上海市浦东新区陆家嘴金融中心88号1201室'
+      phone: '138****1111',
+      address: '阳光小区 3栋 201'
     },
-    appointmentTime: '2023-12-05 09:00',
-    tasks: ['安装空调挂机', '打孔', '管道包扎'],
+    assignTime: '10:00',
+    appointmentTime: '',
+    tasks: ['宽带安装', '光猫调试'],
     equipment: [
-      { name: '格力空调挂机', model: 'KFR-35GW', sn: 'SN20231201001' }
+      { name: '光猫', model: 'HG8145V5', sn: '' }
     ],
     reworkReason: '',
     remark: '',
     photos: [],
-    createdAt: '2023-12-01 10:00',
-    updatedAt: '2023-12-01 10:00'
+    createdAt: '2023-10-29 10:00',
+    updatedAt: '2023-10-29 10:00'
   },
   {
-    orderId: 'WO20231201002',
-    status: 'pending',
-    customer: {
-      name: '李女士',
-      phone: '139****5678',
-      address: '上海市徐汇区漕河泾开发区科技大厦A座502室'
-    },
-    appointmentTime: '2023-12-05 14:00',
-    tasks: ['安装中央空调', '风管连接', '调试'],
-    equipment: [
-      { name: '大金中央空调', model: 'FXDP50QVCP', sn: 'SN20231201002' },
-      { name: '室外机', model: 'RXP50QV2C', sn: 'SN20231201003' }
-    ],
-    reworkReason: '',
-    remark: '',
-    photos: [],
-    createdAt: '2023-12-01 11:00',
-    updatedAt: '2023-12-01 11:00'
-  },
-  {
-    orderId: 'WO20231130001',
+    orderId: 'WO2023102902',
+    orderNo: 'WO2023102902',
     status: 'accepted',
     customer: {
-      name: '王经理',
-      phone: '137****9012',
-      address: '上海市静安区南京西路1266号恒隆广场1808室'
+      name: '李女士',
+      phone: '139****2222',
+      address: '科技园 B座 1205'
     },
-    appointmentTime: '2023-12-04 10:00',
-    tasks: ['安装空调柜机', '电源线路检查', '调试'],
+    assignTime: '09:00',
+    appointmentTime: '',
+    tasks: ['宽带安装', '路由器配置'],
     equipment: [
-      { name: '美的空调柜机', model: 'KFR-72LW', sn: 'SN20231130001' }
+      { name: '光猫', model: 'HG8145V5', sn: '' },
+      { name: '路由器', model: 'AX3000', sn: '' }
     ],
     reworkReason: '',
     remark: '',
     photos: [],
-    createdAt: '2023-11-30 09:00',
-    updatedAt: '2023-11-30 15:00'
+    createdAt: '2023-10-29 09:00',
+    updatedAt: '2023-10-29 09:30'
   },
   {
-    orderId: 'WO20231129001',
+    orderId: 'WO2023102903',
+    orderNo: 'WO2023102903',
     status: 'implementing',
     customer: {
-      name: '赵总',
-      phone: '136****3456',
-      address: '上海市黄浦区外滩中心18号2301室'
+      name: '王总',
+      phone: '136****3333',
+      address: '万达商铺 88号'
     },
-    appointmentTime: '2023-12-03 09:00',
-    tasks: ['安装空调挂机', '打孔', '高空作业', '管道包扎'],
+    assignTime: '08:00',
+    appointmentTime: '今天 14:00',
+    tasks: ['企业宽带安装', '网络布线', '设备调试'],
     equipment: [
-      { name: '海尔空调挂机', model: 'KFR-26GW', sn: 'SN20231129001' },
-      { name: '海尔空调挂机', model: 'KFR-26GW', sn: 'SN20231129002' }
+      { name: '企业光猫', model: 'HG8245H', sn: 'SN88881234' }
     ],
     reworkReason: '',
     remark: '',
     photos: [],
-    createdAt: '2023-11-29 14:00',
-    updatedAt: '2023-12-03 09:30'
+    createdAt: '2023-10-28 08:00',
+    updatedAt: '2023-10-29 14:00'
   },
   {
-    orderId: 'WO20231128001',
+    orderId: 'WO2023102904',
+    orderNo: 'WO2023102904',
+    status: 'rework',
+    customer: {
+      name: '赵大爷',
+      phone: '150****4444',
+      address: '老街 5号'
+    },
+    assignTime: '07:00',
+    appointmentTime: '昨天 10:00',
+    tasks: ['宽带维修', '光猫更换'],
+    equipment: [
+      { name: '光猫', model: 'HG8145V5', sn: 'SN44441234' }
+    ],
+    reworkReason: 'SN码照片不清晰，请重新拍摄',
+    remark: '已完成安装',
+    photos: [],
+    formAccount: 'KD_OLD_123',
+    formSn: 'SN44441234',
+    formPower: '-18.5',
+    createdAt: '2023-10-27 07:00',
+    updatedAt: '2023-10-28 16:00'
+  },
+  {
+    orderId: 'WO2023102905',
+    orderNo: 'WO2023102905',
     status: 'completed',
     customer: {
-      name: '孙小姐',
-      phone: '135****7890',
-      address: '上海市长宁区虹桥路1号港汇广场1502室'
+      name: '陈姐',
+      phone: '180****5555',
+      address: '碧桂园 1期 8栋 1501'
     },
-    appointmentTime: '2023-12-02 14:00',
-    tasks: ['安装空调挂机', '打孔'],
+    assignTime: '06:00',
+    appointmentTime: '前天 09:00',
+    tasks: ['宽带安装', '电视盒子配置'],
     equipment: [
-      { name: '奥克斯空调挂机', model: 'KFR-35GW', sn: 'SN20231128001' }
+      { name: '光猫', model: 'HG8145V5', sn: 'SN55551234' },
+      { name: 'IPTV盒子', model: 'EC6108V9', sn: 'SN55555678' }
     ],
     reworkReason: '',
     remark: '安装顺利，客户满意',
-    photos: [
-      'https://img.yzcdn.cn/vant/cat.jpeg',
-      'https://img.yzcdn.cn/vant/cat.jpeg'
-    ],
-    createdAt: '2023-11-28 10:00',
-    updatedAt: '2023-12-02 16:30'
+    photos: ['https://example.com/photo1.jpg', 'https://example.com/photo2.jpg'],
+    createdAt: '2023-10-26 06:00',
+    updatedAt: '2023-10-26 11:00',
+    completedAt: '2023-10-26 11:00'
   },
   {
-    orderId: 'WO20231127001',
-    status: 'completed',
+    orderId: 'WO2023102906',
+    orderNo: 'WO2023102906',
+    status: 'pending',
     customer: {
-      name: '周先生',
-      phone: '134****2345',
-      address: '上海市普陀区中山北路2000号中环广场1201室'
+      name: '刘先生',
+      phone: '188****6666',
+      address: '恒大名都 2期 5栋 802'
     },
-    appointmentTime: '2023-12-01 10:00',
-    tasks: ['安装空调挂机', '管道包扎', '调试'],
+    assignTime: '11:30',
+    appointmentTime: '',
+    tasks: ['宽带升级', '更换光猫'],
     equipment: [
-      { name: '格力空调挂机', model: 'KFR-50GW', sn: 'SN20231127001' }
+      { name: '千兆光猫', model: 'HG8546M', sn: '' }
     ],
     reworkReason: '',
-    remark: '已完成安装和调试',
-    photos: [
-      'https://img.yzcdn.cn/vant/cat.jpeg'
-    ],
-    createdAt: '2023-11-27 09:00',
-    updatedAt: '2023-12-01 12:00'
-  },
-  {
-    orderId: 'WO20231126001',
-    status: 'rework',
-    customer: {
-      name: '吴经理',
-      phone: '133****6789',
-      address: '上海市闵行区虹桥商务区申长路988号虹桥天地A座1601室'
-    },
-    appointmentTime: '2023-11-30 09:00',
-    tasks: ['安装空调挂机', '打孔', '管道包扎'],
-    equipment: [
-      { name: '大金空调挂机', model: 'FTXS35JV2CW', sn: 'SN20231126001' }
-    ],
-    reworkReason: '管道包扎不美观，需重新包扎处理',
     remark: '',
     photos: [],
-    createdAt: '2023-11-26 11:00',
-    updatedAt: '2023-12-01 09:00'
+    createdAt: '2023-10-29 11:30',
+    updatedAt: '2023-10-29 11:30'
   }
 ];
 

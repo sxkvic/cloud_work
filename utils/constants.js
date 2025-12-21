@@ -10,52 +10,52 @@ const ORDER_STATUS = {
 };
 
 /**
- * 状态列表（按 Tab 顺序）
+ * 状态列表（按Tab顺序）
  */
 const STATUS_LIST = [
   ORDER_STATUS.PENDING,
   ORDER_STATUS.ACCEPTED,
   ORDER_STATUS.IMPLEMENTING,
-  ORDER_STATUS.COMPLETED,
-  ORDER_STATUS.REWORK
+  ORDER_STATUS.REWORK,
+  ORDER_STATUS.COMPLETED
 ];
 
 /**
- * 状态到 UI 的映射配置
+ * 状态到UI的映射配置
  */
-const STATUS_UI_MAP = {
+const STATUS_CONFIG = {
   [ORDER_STATUS.PENDING]: {
-    label: '待接单',
-    color: '#ff976a',
+    text: '待接单',
     tagType: 'warning',
+    tagColor: '#ff976a',
     buttonText: '立即接单',
     buttonType: 'warning'
   },
   [ORDER_STATUS.ACCEPTED]: {
-    label: '接单中',
-    color: '#1989fa',
+    text: '接单中',
     tagType: 'primary',
+    tagColor: '#1989fa',
     buttonText: '开始实施',
     buttonType: 'primary'
   },
   [ORDER_STATUS.IMPLEMENTING]: {
-    label: '实施中',
-    color: '#1989fa',
+    text: '实施中',
     tagType: 'primary',
+    tagColor: '#1989fa',
     buttonText: '继续实施',
     buttonType: 'primary'
   },
   [ORDER_STATUS.COMPLETED]: {
-    label: '已完工',
-    color: '#07c160',
+    text: '已完工',
     tagType: 'success',
-    buttonText: '',
-    buttonType: ''
+    tagColor: '#07c160',
+    buttonText: null,
+    buttonType: null
   },
   [ORDER_STATUS.REWORK]: {
-    label: '需返工',
-    color: '#ee0a24',
+    text: '需返工',
     tagType: 'danger',
+    tagColor: '#ee0a24',
     buttonText: '处理返工',
     buttonType: 'danger'
   }
@@ -68,12 +68,12 @@ const VALID_TRANSITIONS = {
   [ORDER_STATUS.PENDING]: [ORDER_STATUS.ACCEPTED],
   [ORDER_STATUS.ACCEPTED]: [ORDER_STATUS.IMPLEMENTING],
   [ORDER_STATUS.IMPLEMENTING]: [ORDER_STATUS.COMPLETED],
-  [ORDER_STATUS.COMPLETED]: [ORDER_STATUS.REWORK],
+  [ORDER_STATUS.COMPLETED]: [ORDER_STATUS.REWORK],  // 审核不通过时
   [ORDER_STATUS.REWORK]: [ORDER_STATUS.IMPLEMENTING]
 };
 
 /**
- * 本地存储键
+ * 存储键常量
  */
 const STORAGE_KEYS = {
   USER: 'master_user',
@@ -81,27 +81,10 @@ const STORAGE_KEYS = {
   LOGIN_STATUS: 'master_logged'
 };
 
-/**
- * 获取状态 UI 配置
- */
-function getStatusUI(status) {
-  return STATUS_UI_MAP[status] || STATUS_UI_MAP[ORDER_STATUS.PENDING];
-}
-
-/**
- * 检查状态流转是否合法
- */
-function isValidTransition(fromStatus, toStatus) {
-  const validTargets = VALID_TRANSITIONS[fromStatus] || [];
-  return validTargets.includes(toStatus);
-}
-
 module.exports = {
   ORDER_STATUS,
   STATUS_LIST,
-  STATUS_UI_MAP,
+  STATUS_CONFIG,
   VALID_TRANSITIONS,
-  STORAGE_KEYS,
-  getStatusUI,
-  isValidTransition
+  STORAGE_KEYS
 };

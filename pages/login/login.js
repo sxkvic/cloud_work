@@ -3,107 +3,56 @@ import Toast from '@vant/weapp/toast/toast';
 
 Page({
   data: {
-    phone: '',
-    code: '',
-    countdown: 0,
+    jobId: '',
+    password: '',
     loading: false,
     canLogin: false
   },
 
-  timer: null,
-
-  onPhoneChange(e) {
-    const phone = e.detail;
+  onJobIdChange(e) {
+    const jobId = e.detail;
     this.setData({ 
-      phone,
-      canLogin: this.checkCanLogin(phone, this.data.code)
+      jobId,
+      canLogin: this.checkCanLogin(jobId, this.data.password)
     });
   },
 
-  onCodeChange(e) {
-    const code = e.detail;
+  onPasswordChange(e) {
+    const password = e.detail;
     this.setData({ 
-      code,
-      canLogin: this.checkCanLogin(this.data.phone, code)
+      password,
+      canLogin: this.checkCanLogin(this.data.jobId, password)
     });
   },
 
-  checkCanLogin(phone, code) {
-    return phone.length === 11 && code.length >= 4;
+  checkCanLogin(jobId, password) {
+    return jobId.length >= 4 && password.length >= 4;
   },
 
-  sendCode() {
-    const { phone } = this.data;
-    
-    // 验证手机号格式
-    if (!authService.validatePhone(phone)) {
-      Toast.fail('请输入正确的手机号');
-      return;
-    }
+  handleLogin() {
+    const { jobId, password } = this.data;
 
-    // 发送验证码
-    const success = authService.sendVerificationCode(phone);
-    if (success) {
-      Toast.success('验证码已发送');
-      this.startCountdown();
-    } else {
-      Toast.fail('验证码发送失败，请重试');
-    }
-  },
-
-  startCountdown() {
-    this.setData({ countdown: 60 });
-    
-    this.timer = setInterval(() => {
-      if (this.data.countdown <= 1) {
-        clearInterval(this.timer);
-        this.setData({ countdown: 0 });
-      } else {
-        this.setData({ countdown: this.data.countdown - 1 });
-      }
-    }, 1000);
-  },
-
-  async login() {
-    const { phone, code } = this.data;
-
-    // 验证手机号格式
-    if (!authService.validatePhone(phone)) {
-      Toast.fail('请输入正确的手机号');
-      return;
-    }
-
-    // 验证码不能为空
-    if (!code) {
-      Toast.fail('请输入验证码');
+    if (!jobId || !password) {
+      Toast('请输入工号和密码');
       return;
     }
 
     this.setData({ loading: true });
+    Toast.loading({ message: '登录中...', forbidClick: true });
 
-    try {
-      const success = await authService.login(phone, code);
+    // 模拟登录请求
+    setTimeout(() => {
+      Toast.clear();
       
-      if (success) {
-        Toast.success('登录成功');
-        setTimeout(() => {
-          wx.reLaunch({
-            url: '/pages/workbench/workbench'
-          });
-        }, 500);
-      } else {
-        Toast.fail('验证码错误');
-      }
-    } catch (error) {
-      Toast.fail('登录失败，请检查网络');
-    } finally {
-      this.setData({ loading: false });
-    }
-  },
-
-  onUnload() {
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
+      // 模拟登录成功，保存用户信息
+      authService.loginWithJobId(jobId, password);
+      
+      Toast.success('登录成功');
+      setTimeout(() => {
+        wx.reLaunch({
+          url: '/pages/workbench/workbench'
+        });
+      }, 500);
+    }, 1000);
   }
 });

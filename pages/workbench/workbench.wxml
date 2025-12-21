@@ -1,181 +1,93 @@
-<view class="workbench-page">
-  <!-- 顶部导航栏 -->
-  <van-nav-bar title="工作台" fixed placeholder />
-
-  <!-- Tab 栏 -->
+<view class="page-bg">
   <van-tabs 
-    active="{{ activeTab }}" 
-    bind:change="onTabChange"
-    sticky
-    offset-top="44"
-    color="#1989fa"
-    title-active-color="#1989fa"
+    active="{{ active }}" 
+    bind:change="onTabChange" 
+    color="#1989fa" 
+    sticky 
+    animated
+    swipeable
   >
-    <van-tab title="待接单">
-      <view class="order-list">
-        <block wx:if="{{ orders.length > 0 }}">
-          <view 
-            class="order-card card" 
-            wx:for="{{ orders }}" 
-            wx:key="orderId"
-            data-order-id="{{ item.orderId }}"
-            bind:tap="onOrderClick"
-          >
-            <view class="order-header flex-between">
-              <text class="order-id">{{ item.orderId }}</text>
-              <van-tag type="warning" round>待接单</van-tag>
-            </view>
-            <view class="order-address">{{ item.customer.address }}</view>
-            <view class="order-time">
-              <van-icon name="clock-o" size="14px" />
-              <text>{{ item.appointmentTime }}</text>
-            </view>
-            <view class="order-action">
-              <van-button 
-                type="warning" 
-                size="small" 
-                round
-                data-order-id="{{ item.orderId }}"
-                data-action="accept"
-                catch:tap="onActionClick"
-              >立即接单</van-button>
-            </view>
-          </view>
-        </block>
-        <van-empty wx:else description="暂无待接单工单" />
-      </view>
-    </van-tab>
-
-    <van-tab title="接单中">
-      <view class="order-list">
-        <block wx:if="{{ orders.length > 0 }}">
-          <view 
-            class="order-card card" 
-            wx:for="{{ orders }}" 
-            wx:key="orderId"
-            data-order-id="{{ item.orderId }}"
-            bind:tap="onOrderClick"
-          >
-            <view class="order-header flex-between">
-              <text class="order-id">{{ item.orderId }}</text>
-              <van-tag type="primary" round>接单中</van-tag>
-            </view>
-            <view class="order-address">{{ item.customer.address }}</view>
-            <view class="order-time">
-              <van-icon name="clock-o" size="14px" />
-              <text>{{ item.appointmentTime }}</text>
-            </view>
-            <view class="order-action">
-              <van-button 
-                type="primary" 
-                size="small" 
-                round
-                data-order-id="{{ item.orderId }}"
-                data-action="start"
-                catch:tap="onActionClick"
-              >开始实施</van-button>
-            </view>
-          </view>
-        </block>
-        <van-empty wx:else description="暂无接单中工单" />
-      </view>
-    </van-tab>
-
-    <van-tab title="实施中">
-      <view class="order-list">
-        <block wx:if="{{ orders.length > 0 }}">
-          <view 
-            class="order-card card" 
-            wx:for="{{ orders }}" 
-            wx:key="orderId"
-            data-order-id="{{ item.orderId }}"
-            bind:tap="onOrderClick"
-          >
-            <view class="order-header flex-between">
-              <text class="order-id">{{ item.orderId }}</text>
-              <van-tag type="primary" round>实施中</van-tag>
-            </view>
-            <view class="order-address">{{ item.customer.address }}</view>
-            <view class="order-time">
-              <van-icon name="clock-o" size="14px" />
-              <text>{{ item.appointmentTime }}</text>
-            </view>
-            <view class="order-action">
-              <van-button 
-                type="primary" 
-                size="small" 
-                round
-                data-order-id="{{ item.orderId }}"
-                bind:tap="onOrderClick"
-              >继续实施</van-button>
-            </view>
-          </view>
-        </block>
-        <van-empty wx:else description="暂无实施中工单" />
-      </view>
-    </van-tab>
-
-    <van-tab title="已完工">
-      <view class="order-list">
-        <block wx:if="{{ orders.length > 0 }}">
-          <view 
-            class="order-card card" 
-            wx:for="{{ orders }}" 
-            wx:key="orderId"
-            data-order-id="{{ item.orderId }}"
-            bind:tap="onOrderClick"
-          >
-            <view class="order-header flex-between">
-              <text class="order-id">{{ item.orderId }}</text>
-              <van-tag type="success" round>已完工</van-tag>
-            </view>
-            <view class="order-address">{{ item.customer.address }}</view>
-            <view class="order-time">
-              <van-icon name="clock-o" size="14px" />
-              <text>{{ item.appointmentTime }}</text>
-            </view>
-          </view>
-        </block>
-        <van-empty wx:else description="暂无已完工工单" />
-      </view>
-    </van-tab>
-
-    <van-tab title="需返工">
-      <view class="order-list">
-        <block wx:if="{{ orders.length > 0 }}">
-          <view 
-            class="order-card card" 
-            wx:for="{{ orders }}" 
-            wx:key="orderId"
-            data-order-id="{{ item.orderId }}"
-            bind:tap="onOrderClick"
-          >
-            <view class="order-header flex-between">
-              <text class="order-id">{{ item.orderId }}</text>
-              <van-tag type="danger" round>需返工</van-tag>
-            </view>
-            <view class="order-address">{{ item.customer.address }}</view>
-            <view class="order-time">
-              <van-icon name="clock-o" size="14px" />
-              <text>{{ item.appointmentTime }}</text>
-            </view>
-            <view class="order-action">
-              <van-button 
-                type="danger" 
-                size="small" 
-                round
-                data-order-id="{{ item.orderId }}"
-                data-action="rework"
-                catch:tap="onActionClick"
-              >处理返工</van-button>
-            </view>
-          </view>
-        </block>
-        <van-empty wx:else description="暂无需返工工单" />
-      </view>
-    </van-tab>
+    <van-tab title="待接单" name="pending"></van-tab>
+    <van-tab title="接单中" name="accepted"></van-tab>
+    <van-tab title="实施中" name="implementing"></van-tab>
+    <van-tab title="返工" name="rework" info="{{ reworkCount > 0 ? reworkCount : '' }}"></van-tab>
+    <van-tab title="已完工" name="completed"></van-tab>
   </van-tabs>
-</view>
 
-<van-dialog id="van-dialog" />
-<van-toast id="van-toast" />
+  <view class="list-container">
+    <van-empty wx:if="{{ list.length === 0 }}" description="暂无工单" />
+    
+    <block wx:for="{{ list }}" wx:key="orderId">
+      <view class="card" bindtap="goDetail" data-item="{{ item }}">
+        <view class="card-header">
+          <text class="order-no">单号：{{ item.orderNo || item.orderId }}</text>
+          <van-tag wx:if="{{ item.status === 'pending' }}" type="warning">待接收</van-tag>
+          <van-tag wx:elif="{{ item.status === 'accepted' }}" color="#1989fa" plain>待预约</van-tag>
+          <van-tag wx:elif="{{ item.status === 'implementing' }}" color="#1989fa">施工中</van-tag>
+          <van-tag wx:elif="{{ item.status === 'rework' }}" type="danger">审核驳回</van-tag>
+          <van-tag wx:elif="{{ item.status === 'completed' }}" type="success">已完工</van-tag>
+        </view>
+        
+        <view class="card-body">
+          <view class="address">{{ item.customer.address }}</view>
+          <view class="info-row">
+            <van-icon name="manager" class="icon" /> 
+            {{ item.customer.name }} | {{ item.customer.phone }}
+          </view>
+          <view class="info-row">
+            <van-icon name="clock" class="icon" /> 
+            <text wx:if="{{ item.appointmentTime }}">预约：{{ item.appointmentTime }}</text>
+            <text wx:else>派单：{{ item.assignTime || item.createdAt }}</text>
+          </view>
+        </view>
+
+        <!-- 阻止冒泡 catchtap -->
+        <view class="card-footer" catchtap="noop">
+          <van-button 
+            wx:if="{{ item.status === 'pending' }}" 
+            size="small" 
+            type="info" 
+            round 
+            data-id="{{ item.orderId }}"
+            bind:click="handleAccept"
+          >确认接单</van-button>
+          
+          <van-button 
+            wx:if="{{ item.status === 'accepted' }}" 
+            size="small" 
+            type="info" 
+            plain 
+            round 
+            data-item="{{ item }}"
+            bind:click="goDetail"
+          >去预约</van-button>
+          
+          <van-button 
+            wx:if="{{ item.status === 'implementing' }}" 
+            size="small" 
+            type="info" 
+            plain 
+            round 
+            data-item="{{ item }}"
+            bind:click="goDetail"
+          >录入回单</van-button>
+          
+          <van-button 
+            wx:if="{{ item.status === 'rework' }}" 
+            size="small" 
+            type="danger" 
+            plain 
+            round 
+            data-item="{{ item }}"
+            bind:click="goDetail"
+          >查看驳回</van-button>
+          
+          <text wx:if="{{ item.status === 'completed' }}" class="done-text">已归档</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <van-toast id="van-toast" />
+  <van-dialog id="van-dialog" />
+</view>
